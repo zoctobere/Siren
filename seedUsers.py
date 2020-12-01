@@ -6,9 +6,6 @@ import config
 @bot.command()
 async def getroles(ctx):
 
-    print(ctx.author.id)
-    print(config.superUsers)
-
     if ctx.channel.id != config.adminChannel:
         return
 

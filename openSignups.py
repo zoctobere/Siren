@@ -10,7 +10,6 @@ async def opensignupsA(ctx):
     if ctx.channel.id != config.adminChannel:
         return
 
-    # TODO: check for siren admin and/or restream lead+
 
     data = { 'monday': await newRestream.createRestream('mondayWeekly', ctx.author.name),
              'tuesday': await newRestream.createRestream('urc', ctx.author.name),
@@ -26,7 +25,6 @@ async def opensignupsA(ctx):
 
         db.addRestream(data[race]['ID'], data[race]['color'], message.id, data[race]['embedTitle'], data[race]['event'], data[race]['date'], ctx.author.name)
 
-        # def addRaceDB(restreamID, messageID, event, raceDate, lead)
 
         await ctx.send(data[race]['confirmation'])
     await ctx.message.delete()
@@ -37,7 +35,6 @@ async def opensignupsB(ctx):
     if ctx.channel.id != config.adminChannel:
         return
 
-    # TODO: check for siren admin and/or restream lead+
 
     data = { 'sunday': await newRestream.createRestream('slapdash', ctx.author.name),
              'monday': await newRestream.createRestream('mondayWeekly', ctx.author.name),
@@ -53,7 +50,6 @@ async def opensignupsB(ctx):
 
         db.addRestream(data[race]['ID'], data[race]['color'], message.id, data[race]['embedTitle'], data[race]['event'], data[race]['date'], ctx.author.name)
 
-        # def addRaceDB(restreamID, messageID, event, raceDate, lead)
 
         await ctx.send(data[race]['confirmation'])
     await ctx.message.delete()

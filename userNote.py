@@ -18,12 +18,16 @@ async def addnote(ctx, arg1, arg2):
         await ctx.message.delete()
         return
 
+    oldNote = db.getUserField(arg1, 'note')
+
     db.setUserField(arg1, 'note', arg2)
 
-    await ctx.send('```Note added for ' + arg1 + '.\n\nNote Contents: ' + arg2 + '```')
+    await ctx.send('```Note added for ' + arg1 + '.\n\nNote Contents: ' + arg2 + '\n\nPrevious Note:' + oldNote + '```')
 
 @addnote.error
 async def clear_error(ctx, error):
+    if ctx.channel.id != config.adminChannel:
+        return
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send('```Please specify the user and the note you wish to add (enclosed in quotes). Usage: .addnote <username> <"This is an example note.">```')
         await ctx.message.delete()

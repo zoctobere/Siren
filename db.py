@@ -9,10 +9,10 @@ db = client.SirenDB
 restreams = db.TestRestreams
 users = db.TestUsers
 
-def addRestream(restreamID, color, messageID, metaTitle, event, raceDate, lead):
+def addRestream(restreamID, color, signupsID, metaTitle, event, raceDate, lead):
     race = { 'restreamID': restreamID,
              'color': color,
-             'messageID': messageID,
+             'signupsID': signupsID,
              'displayTitle': metaTitle,
              'event': event['name'],
              'time': event['startTime'],
@@ -23,6 +23,7 @@ def addRestream(restreamID, color, messageID, metaTitle, event, raceDate, lead):
              'commentary2': '',
              'tracker': '',
              'restreamer': '',
+             'assignedBy': '',
              'status': 'Open'
             }
     restreams.insert_one(race)
@@ -31,7 +32,9 @@ def getRestreamField(restreamID, field):
     return restreams.find_one({'restreamID': restreamID})[field]
 
 def setRestreamField(restreamID, field, value):
+    print('calling')
     restreams.find_one_and_update({'restreamID': restreamID}, {'$set': {field: value}})
+    print('finishing')
 
 def doesRestreamExist(restreamID):
     if restreams.count_documents({'restreamID': restreamID}):

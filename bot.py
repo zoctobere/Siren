@@ -12,7 +12,9 @@ builtins.bot = bot
 import openSignups
 import getVolunteers
 import setVolunteers
+import checkVolunteers
 import publishAssignments
+
 import seedUsers
 import userNote
 
